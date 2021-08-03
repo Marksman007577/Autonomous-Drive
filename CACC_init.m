@@ -3,24 +3,25 @@ clc;clear all;close all;
 
 %% CACC Vehicle Parameters
 % headway constant
-h = 0.9;
+h = 0.9; % Headway time gap.
 
-%% lead vehicle time dynamics
+%% Lead vehicle dynamics parameters
 tau0 = 0.1 %lead vehivle time const.
-tau = 0.002; %feed forward filter closed loop bandwidth
+Lambda0 = 1; %lead vehicle DC Gain.
 
-% platoon vehicle parameters
+%% Feed forward filter closed loop bandwidth
+tau = 0.002; 
+
+%% Platoon vehicle(s) dynamics parameters (DC Gains and Time constants)
 tau1 = 0.5;
 tau2 = 0.7;
 tau3 = 0.3;
-
-% tau4 = 0.7
 
 Lambda1 = 0.5;
 Lambda2 = 0.7;
 Lambda3 = 0.75;
 
-% control parameters
+%% PD Headway controller parameters
 Kp = 1.5;
 Kd = 1.2;
 
