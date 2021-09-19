@@ -1,4 +1,4 @@
-function [allData, scenario, sensor] = course3_city_road()
+function [allData, scenario, sensor] = generateSensorData()
 %generateSensorData - Returns sensor detections
 %    allData = generateSensorData returns sensor detections in a structure
 %    with time for an internally defined scenario and sensor suite.

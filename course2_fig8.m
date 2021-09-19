@@ -1,4 +1,4 @@
-function [allData, scenario, sensors] = course2_fig8()
+function [allData, scenario, sensors] = figeightcourse()
 %figeightcourse - Returns sensor detections
 %    allData = figeightcourse returns sensor detections in a structure
 %    with time for an internally defined scenario and sensor suite.
