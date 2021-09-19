@@ -50,25 +50,3 @@ Y_0 = yRef(1,1);            % Initial vehicle posiiton
 psi_0 = 0;                  % Yaw angle for lane change scenerio 
 % psi_0 = -1.617;           % Yaw angle for city course scenerio 
 % psi_0 = 4.17239;          % Yaw angle for eight course scenerio
-%%
-% % assuming constant velocity
-% v_x = Vx; %mps
-% %% Dynamic bicycle model 
-% % continous A B C D matrixes
-% A = [0 1 Vx 0;
-%      0 -2*(c_f+c_r)/(m*v_x) 0 -2*(l_f*c_f + l_r*c_r)/(m*v_x) - v_x;
-%      0 0 0 1;
-%      0 2*(l_r*c_r - l_f*c_f)/(I_z*v_x)  0  -2*(l_r^2*c_r - l_f^2*c_f)/(I_z*v_x)];
-%  
-% B = [0;
-%     2*c_f/m;
-%     0;
-%     2*l_f*c_f/I_z];
-% 
-% C= [1 0 0 0;
-%        0 1 0 0];
-% D = [0;0];
-% %%
-% vehicle = ss(A,B,C,D)
-% %%
-% load('mpc1.mat')
