@@ -14,7 +14,7 @@ plant_num = 9.22123*1e-4;
 plant_den = [1 1/50.5355];
 G_plant = tf(plant_num, plant_den);
 
-
+sim_time = 100;
 %% PID Gain Values from PID Tuner App
 Kp = 174.6119;
 Ki = 10.1187;
