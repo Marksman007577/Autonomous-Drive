@@ -10,37 +10,37 @@ clear all; close all
 % scenario = course2_fig8;
 
 % scenario = course3_city_road;
-scenario = course3_city_road_10mps;
+% scenario = course3_city_road_10mps;
 % scenario = course3_city_road_25mps;
 
 % scenario = lane_change_15mps;
 % scenario = lane_change_25mps;
 
-Vx = 30;
+% Vx = 30;
 
-n = size(scenario);
+% n = size(scenario);
 
-for ii =1:n(2)
-    refPose(:,ii) = [scenario(ii).ActorPoses.Position(1);scenario(ii).ActorPoses.Position(2);scenario(ii).ActorPoses.Yaw];
-    yaw_rate_pose(ii) = scenario(ii).ActorPoses.AngularVelocity(3);
-end 
-xRef = refPose(1,:);
-% yRef = refPose(2,:);
-yRef = refPose(2,:) + 2; %for lane change course
-yawRef = refPose(3,:);
-refPose = refPose'; % reference waypoints
-yaw_rate_pose = deg2rad(yaw_rate_pose); % angular velocity of the path
+% for ii =1:n(2)
+%     refPose(:,ii) = [scenario(ii).ActorPoses.Position(1);scenario(ii).ActorPoses.Position(2);scenario(ii).ActorPoses.Yaw];
+%     yaw_rate_pose(ii) = scenario(ii).ActorPoses.AngularVelocity(3);
+% end 
+% xRef = refPose(1,:);
+% % yRef = refPose(2,:);
+% yRef = refPose(2,:) + 2; %for lane change course
+% yawRef = refPose(3,:);
+% refPose = refPose'; % reference waypoints
+% yaw_rate_pose = deg2rad(yaw_rate_pose); % angular velocity of the path
 
-%% Define initial position
-X_o = xRef(1,1); % initial vaehicle position
-Y_o = yRef(1,1); % initial vehicle position
-psi_o = deg2rad(yaw_rate_pose); % angular velocity of the path
-
-%% define reference time 
-sim_time = 200;  % simulation time for city road
-
-s = size(xRef);
-tRef = (linspace(0,sim_time,s(2)))'; % this time variable is used in the "2D Visualization" block for plotting the reference points. 
+% %% Define initial position
+% X_o = xRef(1,1); % initial vaehicle position
+% Y_o = yRef(1,1); % initial vehicle position
+% psi_o = deg2rad(yaw_rate_pose); % angular velocity of the path
+% 
+% %% define reference time 
+% sim_time = 200;  % simulation time for city road
+% 
+% s = size(xRef);
+% tRef = (linspace(0,sim_time,s(2)))'; % this time variable is used in the "2D Visualization" block for plotting the reference points. 
 
 %% 
 %% Define the sample time Ts and the simulation duration T in seconds
@@ -48,13 +48,13 @@ Ts = 0.1; % MPC sample time
 
 %% curvature preview and calculation
 PredictionHorizon = 10;
-md = get_curvature(Vx, yaw_rate_pose, tRef);
-data = mpc_previewer_maskinit(md, tRef);
+% md = get_curvature(Vx, yaw_rate_pose, tRef);
+% data = mpc_previewer_maskinit(md, tRef);
 
 u_min = -0.5; % constraint for the steering angle on the anticlockwise motion -30deg
 u_max = 0.5;  % constraint for the steering angle on the clockwise motion +30deg
 
-Radius = abs(1./md.signals.values);
+% Radius = abs(1./md.signals.values);
 
 %% ACC Parameters
 % specify the inital position and velocity for the two vehicles
@@ -89,13 +89,13 @@ Cd = 0.3;
 f = 0.0125;
 v_0 = 22;
 vw_0 = 1.2;
-A = 2.24;
+a = 2.24;
 
 %% Vehicle dynamics
 Vx = 30;
-tau = m /(rho*Cd*A*(v_0 - vw_0));
+tau = m /(rho*Cd*a*(v_0 - vw_0));
 
-DCG = 1 /(rho*Cd*A*(v_0 - vw_0));
+DCG = 1 /(rho*Cd*a*(v_0 - vw_0));
 
 % longitudinal vehicle dynamics
 A_1 = [-1/tau 0; 1 0];
@@ -104,17 +104,18 @@ C_1 = [0 1; 0 0];
 D_1 = 0;
 
 % lateral vehicle dynamics
-A_2 = [-2*(Cf+Cr)/(m*Vx)- Vx - 2*(lf*Cf + lr*Cr)/(m*Vx);... 
-       -2*(lf*Cf - lr*Cr)/(Iz*Vx) - 2*(lr.^2*Cr + lf.^2*Cf)/(Iz*Vx)];
+A_2 = [-2*(Cf + Cr)/(m*Vx)  -Vx-2*(Cf*lf - Cr*lr)/(m*Vx);...
+           -2*(Cf*lf -Cr*lr)/(Iz*Vx) -2*(Cf*lf.^2 + Cr*lr.^2)/ (Iz*Vx)];
    
 B_2 = [2*Cf/m; 2*lf*Cf/Iz];
+
 C_2 = [1 0; 0 1];
-D_2 = [0;0];
+D_2 = [0; 0];
 
 % combined dynamics
-A = [A_1 zeros(2,2); zeros(2,2)A_2];
-B = [B_1 zeros(2,1); zeros(2,1)B_2];
-C = [C_1 zeros(2,2); zeros(2,2)C_2];
+A = [A_1 zeros(2,2); zeros(2,2) A_2];
+B = [B_1 zeros(2,1); zeros(2,1) B_2];
+C = [C_1 zeros(2,2); zeros(2,2) C_2];
 D = 0;
 
 Vehicle = ss(A,B,C,D);
