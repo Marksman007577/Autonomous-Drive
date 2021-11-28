@@ -68,12 +68,12 @@ t_gap = 1.4; % time gap in sec.
 D_default = 10; % default stopping distance in meters
 
 %% Specifying the drivers set velocity
-v_set = 30; % velocity in m/s
+v_set = 35; % velocity in m/s
 
 %% Considering the physical limitation of the vehicle dynamics
 % acceleration is constrained to a range [-3 2](m/s^2)
 amin_ego = -3; 
-amax_ego = 2;
+amax_ego = 3;
 
 %% Model parameters
 m = 1140;      %kg
