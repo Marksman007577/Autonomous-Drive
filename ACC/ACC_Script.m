@@ -16,11 +16,11 @@ G_plant = tf(plant_num, plant_den);
 
 sim_time = 600;
 %% PI and PID Gain Values from PID Tuner App
-%Velocity control
+%Velocity control PI controller
 Kp_vel = 174.6119;
 Ki_vel = 10.1187;
 
-%Headway control
+%Headway control PID controller
 Kp_hw = 143.6748;
 Ki_hw = 7.4723;
 Kd_hw = -8.9604;
