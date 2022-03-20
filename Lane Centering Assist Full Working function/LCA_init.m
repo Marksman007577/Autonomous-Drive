@@ -3,7 +3,7 @@
 clc;
 clear all; close all
 %% Waypoints extraction from scenarios
-scenario = lane_change_25mps
+scenario = lane_change_25mps;
 % scenario = course1_lancechange;
 % scenario = lane_change_course_1;
 % scenario = course2_fig8;
@@ -17,8 +17,8 @@ for ii =1:n(2)
 end 
 xRef = refPose(1,:);
 yRef = refPose(2,:) ;
-% yRef = refPose(2,:) + 2; %for lane change course
-yawRef = refPose(3,:);
+yRef = refPose(2,:) + 2; %for lane change course
+% yawRef = refPose(3,:);
 refPose = refPose'; % reference waypoints
 yaw_rate_pose = deg2rad(yaw_rate_pose); %angular velocity of the path
 
@@ -43,13 +43,14 @@ u_max = 0.5;
 Radius =abs(1./ md.signals.values);
 %% Model parameters
 m = 1140;
+
 I_z = 1436.24; %kgm2
 l_f = 1.165; 
 l_r = 1.165;
 c_f = 155494.663;
 c_r = 1554494.663;
 
-m = 1140;
+
 Iz = 1436.24;
 lf = 1.165;
 lr = 1.165;
