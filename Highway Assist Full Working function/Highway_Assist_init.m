@@ -28,7 +28,7 @@ X_o = xRef(1,1);%initial vehicle position
 Y_o = yRef(1,1);%initial vehicle position
 psi_o = deg2rad(yawRef(1,1));%for lane change
 %% Define reference time 
-sim_time = 100;  % simulation time for city road
+sim_time = 100;  % simulation time 
 
 s = size(xRef);
 tRef = (linspace(0,sim_time,s(2)))'; % this time variable is used in the "2D Visualization" block for plotting the reference points. 
