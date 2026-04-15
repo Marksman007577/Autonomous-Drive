@@ -6,7 +6,7 @@ clc;clear all;close all;
 h = 0.9; % Headway time gap.
 
 %% Lead vehicle dynamics parameters
-tau0 = 0.1; %lead vehivle time const.
+tau0 = 0.1; %lead vehicle time const.
 Lambda0 = 1; %lead vehicle DC Gain.
 
 %% Feed forward filter closed loop bandwidth
